@@ -1,0 +1,53 @@
+.download_cont{
+    color: white;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.download_title{
+    font-size: 20px;
+    text-align: right;
+    font-family: 'Aduma';
+}
+
+.download_desc{
+    font-size: 12px;
+    text-align: right;
+    font-family: 'Aduma';
+}
+
+.download_btn{
+    border: 1px solid #1e498fd8;
+    color: #1e498fd8;
+    width: 80%;
+    padding: 5px;
+    border-radius: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.small_texxt_download{
+    font-size: 12px;
+    text-align: right;
+    font-family: 'Aduma';
+    color: rgb(187, 179, 179)
+}
+
+.new_icon{
+    position: relative;
+    right: -10px;
+    top: 13px;
+}
+
+.border_comp_top{
+    border-top: 1px solid #4b5360;
+    margin-top: 23px;
+}
+
+.check_icon{
+    margin-left: 5px;
+}
