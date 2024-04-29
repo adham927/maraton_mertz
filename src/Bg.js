@@ -5,18 +5,31 @@ import {useState} from "react"
 import Disp_img from './Disp_img';
 import bunner from './assets/banner.png';
 import logo from './assets/logo.png';
+import Download_popup from './Download_popup';
 
 function Bg() {
 
   const [selected_tab, setselected_tab] = useState(true);
   const [show_eula, setShow_eula] = useState(false);
-  function selected(){
-    setselected_tab(!selected_tab);
+  const [show_download_popup, setShow_download_popup] = useState(false);
+  function selected(e){
+    if(e.target.innerHTML == 'הוסר רקע'){
+      setselected_tab(true)
+    }
+    else{
+      setselected_tab(false)
+    }
+    // setselected_tab(!selected_tab);
   }
 
   function show_popup_eula(){
     setShow_eula(!show_eula);
   }
+
+  function show_download_popup_func(){
+    setShow_download_popup(!show_download_popup);
+  }
+
   return (
     <div>
       <div className="Bg_cont">
@@ -24,6 +37,7 @@ function Bg() {
       <img className="close_img" src={close} alt="close"/>
 
       <div className="upload_btn">העלאת תמונה </div>
+      <div className='upload_btn_text' >פורמטים נתמכים jpeg, png</div>
       <div className="content_div">
         <div className="content_left">
             <div className="tabs_cont">
@@ -44,7 +58,7 @@ function Bg() {
         </div>
         <div className="content_right">
             <div className="content_right_middle">
-                <Download title="תמונה חינם" desc="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 פיקסל" comp_side="top"></Download>
+                <Download show_download_popup_func={show_download_popup_func} title="תמונה חינם" desc="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 פיקסל" comp_side="top"></Download>
                 <Download title="Pro" desc="תצוגה מלאה" btn_text="HD הורד" small_text="איכות הטובה ביותר עד 25 מגה פיקסל" comp_side="bottom"></Download>
             </div>
         </div>
@@ -76,6 +90,8 @@ function Bg() {
           
         </div>
       </> : <></>}
+
+      {show_download_popup == true? <Download_popup show_download_popup_func={show_download_popup_func}></Download_popup>: <></>}
 
     </div>
     

@@ -2,6 +2,10 @@ import './Download.css';
 import new_icon from './assets/new.png'
 import check from './assets/check.png'
 function Download(props) {
+
+  function show_popup(){
+     props.show_download_popup_func()
+  }
   return (
     <div className={"download_cont " + (props.comp_side ? 'border_comp_top' : '')}>
         <div className="download_title">
@@ -14,7 +18,7 @@ function Download(props) {
         <div className="download_desc">
              {props.desc}  
         </div>
-        <div className="download_btn">
+        <div className="download_btn" onClick={show_popup}>
              {props.btn_text}  
         </div>
         <div className="small_texxt_download">

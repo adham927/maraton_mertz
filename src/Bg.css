@@ -28,13 +28,13 @@
     background-color: #475366;
     width: 116px;
     color: white;
-    padding: 13px;
+    padding: 12px;
     text-align: right;
     border-radius: 28px;
     position: absolute;
-    left: 65px;
-    top: 28px;
-    background-image: url('./assets/Upload.png');
+    left: 9px;
+    top: 61px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABvSURBVHgBzZHLDYAwDEMdxJ2OABswAiOwASuxAYzUTWCDYm4QEUR6oU+yqsh1PwlQFCmlHl4YmqmNmp782giNXFaqoTrWQUR2OG5dLK9CJtnBG3xa66mvhvkn7euuBpoDPiDqxHMM4WV/5FgifuEAcREype6WR6sAAAAASUVORK5CYII=);
     background-repeat: no-repeat;
     background-position: 12px 17px;
 }
@@ -178,6 +178,12 @@
     margin-right: 15px;
 }
 
-.logo_img{
-
+.upload_btn_text{
+    position: absolute;
+    color: #ffffff61;
+    direction: rtl;
+    top: 77px;
+    left: 159px;
+    font-size: 12px;
+    
 }
