@@ -19,9 +19,12 @@ function Disp_img(props) {
                </>
                 : <></>}
             </div>
+            {props.img_bg!= '' ?
              <div>
-             <img src={img_bg} className='img_bg'/>
-            </div>
+             <img src={props.img_bg} className='img_bg'/>
+            </div> 
+            : <></>}
+
             
            
         </div>

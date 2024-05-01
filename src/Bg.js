@@ -14,10 +14,16 @@ function Bg() {
     inputElement.current.click();
 };
   const [show_error, setShow_error] = useState(false);
+  const [show_loader, setshow_loader] = useState(false);
   const [selected_tab, setselected_tab] = useState(true);
   const [show_eula, setShow_eula] = useState(false);
   const [show_download_popup, setShow_download_popup] = useState(false);
+  const [img_bg, setimg_bg] = useState('');
+  const [img_bg_no_bg, setimg_bg_no_bg] = useState('');
+
+  
   function selected(e){
+    
     if(e.target.innerHTML == 'הוסר רקע'){
       setselected_tab(true)
     }
@@ -36,8 +42,9 @@ function Bg() {
   }
 
   function upload_file(e){
+    setshow_loader(!show_loader);
     let file = e.target.files[0];
-    debugger;
+    const server_url = 'http://localhost:5000/'
 
     if((file.type == 'image/png' || file.type == 'image/jpeg') && file.size <= 10000000){
       let formData = new FormData();    
@@ -47,16 +54,21 @@ function Bg() {
         'Content-Type': 'multipart/form-data'
       }
       axios.post('http://localhost:5000/upload_img',formData,headers)
-    .then(response => {
-      console.log(response.data);
+      .then(response => {
+      setimg_bg(server_url+response.data)
+      setimg_bg_no_bg(server_url+'no_bg_'+response.data)
+      e.target.value=null;
+      setshow_loader(false);
     })
     .catch(error => {
       console.log(error);
+      
     });
     }
     else{
-      setShow_error(true)
+      setShow_error(true);
     }
+    setshow_loader(!show_loader);
   }
 
   return (
@@ -76,8 +88,14 @@ function Bg() {
                 <div className={"tabs_text text_bg_orig " + (selected_tab!=true ? 'border_bottom_selected' : '')} onClick={selected}>מקורי</div>
             </div>
             <div className="content_left_middle">
-               {selected_tab==true ? <Disp_img comp_type="no_bg_comp"></Disp_img> : <Disp_img comp_type="orig_comp"></Disp_img>}
+               {selected_tab==true ? <Disp_img comp_type="no_bg_comp" img_bg={img_bg_no_bg}></Disp_img> : <Disp_img comp_type="orig_comp" img_bg={img_bg}></Disp_img>}
             </div>
+            {show_loader ? 
+            <div className='loader'>
+              <div className='loader_percent'>
+                39%
+              </div>
+            </div>: <></> }
 
             <div className="footer_left_content">
               <div className='footer_text'>

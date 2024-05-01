@@ -199,3 +199,24 @@
     left: 164px;
     top: 90px;
 }
+
+.loader{
+    background-color: black;
+    width: 48%;
+    height: 28px;
+    position: absolute;
+    top: 301px;
+    margin-left: 63px;
+    box-shadow: 1px 1px 10px #cbcacaa1;
+    border-radius: 5px;
+}
+
+.loader_percent{
+    background-image: linear-gradient(79deg, #c614ce, #312dd1);
+    height: 92%; 
+    margin-left: 1px;
+    margin-top: 1px;
+    width: 39%;
+    text-align: center;
+    color:  white;
+}
