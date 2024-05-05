@@ -19,6 +19,7 @@ app.post('/upload_img', function (req, res){
     let time = d.getTime();
 
     let imageFile = req.files.fileImg;
+    let color = req.body.color;
     let image =`${__dirname}/uploaded_img/${time}${req.files.fileImg.name}`
     imageFile.mv(image, async err => {
         if (err) {
@@ -27,7 +28,7 @@ app.post('/upload_img', function (req, res){
 
         
 
-        await send_to_api(image, time+req.files.fileImg.name);
+        await send_to_api(image, time+req.files.fileImg.name, color);
         res.send(`${time}${req.files.fileImg.name}`);
       });
     })

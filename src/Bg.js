@@ -1,7 +1,7 @@
 import './Bg.css';
 import close from './assets/close.png'
 import Download from './Download'
-import {useState, useRef} from "react"
+import {useState, useRef, useEffect} from "react"
 import Disp_img from './Disp_img';
 import bunner from './assets/banner.png';
 import logo from './assets/logo.png';
@@ -20,7 +20,15 @@ function Bg() {
   const [show_download_popup, setShow_download_popup] = useState(false);
   const [img_bg, setimg_bg] = useState('');
   const [img_bg_no_bg, setimg_bg_no_bg] = useState('');
+  const [choose_color, setchoose_color] = useState('');
 
+
+  useEffect(() => {
+    if(img_bg!=''){
+      setshow_loader(!show_loader);
+    }
+   
+  }, [img_bg])
   
   function selected(e){
     
@@ -37,6 +45,10 @@ function Bg() {
     setShow_eula(!show_eula);
   }
 
+  function setchoose_color_func(color){
+    setchoose_color(color);
+  }
+
   function show_download_popup_func(){
     setShow_download_popup(!show_download_popup);
   }
@@ -50,6 +62,9 @@ function Bg() {
       let formData = new FormData();    
 
       formData.append('fileImg', e.target.files[0]);
+      if(choose_color!=''){
+      formData.append('color', choose_color);
+      }
       let headers={
         'Content-Type': 'multipart/form-data'
       }
@@ -57,8 +72,8 @@ function Bg() {
       .then(response => {
       setimg_bg(server_url+response.data)
       setimg_bg_no_bg(server_url+'no_bg_'+response.data)
+      setchoose_color()
       e.target.value=null;
-      setshow_loader(false);
     })
     .catch(error => {
       console.log(error);
@@ -68,7 +83,7 @@ function Bg() {
     else{
       setShow_error(true);
     }
-    setshow_loader(!show_loader);
+   
   }
 
   return (
@@ -88,7 +103,7 @@ function Bg() {
                 <div className={"tabs_text text_bg_orig " + (selected_tab!=true ? 'border_bottom_selected' : '')} onClick={selected}>מקורי</div>
             </div>
             <div className="content_left_middle">
-               {selected_tab==true ? <Disp_img comp_type="no_bg_comp" img_bg={img_bg_no_bg}></Disp_img> : <Disp_img comp_type="orig_comp" img_bg={img_bg}></Disp_img>}
+               {selected_tab==true ? <Disp_img comp_type="no_bg_comp" img_bg={img_bg_no_bg} setchoose_color_func={setchoose_color_func}></Disp_img> : <Disp_img comp_type="orig_comp" img_bg={img_bg}></Disp_img>}
             </div>
             {show_loader ? 
             <div className='loader'>
@@ -107,8 +122,8 @@ function Bg() {
         </div>
         <div className="content_right">
             <div className="content_right_middle">
-                <Download show_download_popup_func={show_download_popup_func} title="תמונה חינם" desc="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 פיקסל" comp_side="top"></Download>
-                <Download title="Pro" desc="תצוגה מלאה" btn_text="HD הורד" small_text="איכות הטובה ביותר עד 25 מגה פיקסל" comp_side="bottom"></Download>
+                <Download img_bg_no_bg={img_bg_no_bg}  show_download_popup_func={show_download_popup_func} title="תמונה חינם" desc="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 פיקסל" comp_side="top"></Download>
+                <Download show_download_popup_func={show_download_popup_func} title="Pro" desc="תצוגה מלאה" btn_text="HD הורד" small_text="איכות הטובה ביותר עד 25 מגה פיקסל" comp_side="bottom"></Download>
             </div>
         </div>
       </div>
@@ -140,7 +155,7 @@ function Bg() {
         </div>
       </> : <></>}
 
-      {show_download_popup == true? <Download_popup show_download_popup_func={show_download_popup_func}></Download_popup>: <></>}
+      {show_download_popup == true? <Download_popup show_download_popup_func={show_download_popup_func} img_bg_no_bg={img_bg_no_bg}></Download_popup>: <></>}
 
     </div>
     

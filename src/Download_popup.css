@@ -8,7 +8,7 @@
 }
 
 .download_popup_cont{
-    width: 45%;
+    width: 500px;
     height: 238px;
     background-color: white;
     position: absolute;
@@ -84,9 +84,11 @@
     background-image: linear-gradient(79deg, #c614ce, #312dd1);
     border: 0;
     color: white;
+    cursor: pointer;
 }
 
 .cancel_btn{
+    cursor: pointer;
     width: 108px;
     background-color: transparent;
     height: 45px;
@@ -101,4 +103,12 @@
     position: absolute;
     top: 177px;
     left: 145px;
+}
+
+.error_div{
+    color: red;
+    position: absolute;
+    top: 152px;
+    left: 258px;
+    font-size: 12px;
 }

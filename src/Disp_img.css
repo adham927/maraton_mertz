@@ -21,7 +21,7 @@
     border-radius: 20px;
     background-color: transparent;
     color: #ffffff8a;
-    text-align: right;
+    text-align: center;
     padding-right: 8px;
     height: 26px;
     position: absolute;
@@ -38,4 +38,15 @@
     position: absolute;
     top: 7px;
     left: 6px;
+}
+
+.color-choose{
+    position: absolute;
+    left: 75px;
+    top: 0px;
+    height: 23px;
+    width: 12px;
+    border: 1px solid #ffffff8c;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
 }
