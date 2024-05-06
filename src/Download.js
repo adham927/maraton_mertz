@@ -1,10 +1,10 @@
 import './Download.css';
 import new_icon from './assets/new.png'
 import check from './assets/check.png'
+import { useState } from 'react';
 function Download(props) {
 
   function show_popup(){
-     debugger;
      if(props.img_bg_no_bg!=''){
          props.show_download_popup_func()
      }
@@ -22,7 +22,7 @@ function Download(props) {
         <div className="download_desc">
              {props.desc}  
         </div>
-        <div className="download_btn" onClick={show_popup}>
+        <div className="download_btn" style={{color: props.img_bg_no_bg!='' ? '#03a9f4': 'gray', borderColor: props.img_bg_no_bg!='' ? '#03a9f4': 'gray'}} onClick={show_popup}>
              {props.btn_text}  
         </div>
         <div className="small_texxt_download">
