@@ -1,0 +1,26 @@
+.popup_download_cont{
+    width: 38%;
+    height: 250px;
+    background-color: white;
+    position: absolute;
+    top: 30%;
+    left: 31%;
+    border-radius: 15px;
+}
+.overlay{
+    background-color: #3e3e3e82;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+}
+.download_pic{
+    margin-left: 182px;
+    margin-top: -15px;
+}
+
+.img_eula{
+    margin-left: 13px;  
+}
+     

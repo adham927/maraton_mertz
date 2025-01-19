@@ -1,21 +1,61 @@
 import './Bg.css';
 import close from './assets/close.png'
 import Download from './Download'
-import {useState} from "react"
+import {useState, useRef} from "react"
 import Disp_img from './Disp_img';
 import bunner from './assets/banner.png';
 import logo from './assets/logo.png';
+import Download_popup from './Download_popup';
+import axios from 'axios';
 
 function Bg() {
 
   const [selected_tab, setselected_tab] = useState(true);
   const [show_eula, setShow_eula] = useState(false);
+  const [show_download_popup, setShow_download_popup] = useState(false);
+  const [show_error, setShow_error] = useState(false);
+
+const inputElement = useRef();
+
+const focusInput = () => {
+inputElement.current.click();
+}
+
   function selected(){
     setselected_tab(!selected_tab);
   }
 
   function show_popup_eula(){
     setShow_eula(!show_eula);
+  }
+  function show_download_popup_func(){
+    setShow_download_popup(!show_download_popup);
+  }
+  function upload_file(e){
+debugger;
+
+let formData = new FormData();  
+
+formData.append('fileImg', e.target.files[0]);   
+ 
+  let headers= {
+    'Content-Type': 'multipart/form-data'
+  }
+
+if(( e.target.files[0].type == 'image/png' ||  e.target.files[0].type == 'image/jpeg') &&  e.target.files[0].size <= 10000000){
+  axios.post('http://localhost:5000/upload_img',formData , headers)
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+}
+else{
+  setShow_error(true)
+}
+   
+ 
   }
   return (
     <div>
@@ -24,6 +64,8 @@ function Bg() {
       <img className="close_img" src={close} alt="close"/>
 
       <div className="upload_btn">העלאת תמונה </div>
+      {show_error ? <>פורמט לא מתמך</>: <></>}
+      <input type='file' onChange={upload_file} ref={inputElement}/>
       <div className="content_div">
         <div className="content_left">
             <div className="tabs_cont">
@@ -44,8 +86,8 @@ function Bg() {
         </div>
         <div className="content_right">
             <div className="content_right_middle">
-                <Download title="תמונה חינם" desc="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 פיקסל" comp_side="top"></Download>
-                <Download title="Pro" desc="תצוגה מלאה" btn_text="HD הורד" small_text="איכות הטובה ביותר עד 25 מגה פיקסל" comp_side="bottom"></Download>
+                <Download show_download_popup_func={show_download_popup_func} title="תמונה חינם" desc="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 פיקסל" comp_side="top"></Download>
+                <Download show_download_popup_func={show_download_popup_func} title="Pro" desc="תצוגה מלאה" btn_text="HD הורד" small_text="איכות הטובה ביותר עד 25 מגה פיקסל" comp_side="bottom"></Download>
             </div>
         </div>
       </div>
@@ -76,7 +118,9 @@ function Bg() {
           
         </div>
       </> : <></>}
-
+      {show_download_popup == true?
+      <Download_popup show_download_popup_func={show_download_popup_func}></Download_popup>: <></>
+      }
     </div>
     
     
