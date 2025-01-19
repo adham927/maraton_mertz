@@ -8,8 +8,13 @@ const cors = require('cors');
 app.use(cors());
 
 app.post('/upload_img', function(req, res){
-    console.log(req.files);
-})
+    let imageFile.mv(`${__dirname}/uploaded_img/${req.files.fileImg.name}`,err => {
+        if (err) {
+            return res.status(500).send(err)
+        }
 
+    })
+})
+jQzn4MLx1oRtt4UxCFQZzQ3r
 console.log('server running');
 app.listen(5000);

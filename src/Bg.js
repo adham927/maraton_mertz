@@ -18,7 +18,7 @@ function Bg() {
 const inputElement = useRef();
 
 const focusInput = () => {
-inputElement.current.click();
+  inputElement.current.click();
 }
 
   function selected(){
@@ -43,6 +43,7 @@ formData.append('fileImg', e.target.files[0]);
   }
 
 if(( e.target.files[0].type == 'image/png' ||  e.target.files[0].type == 'image/jpeg') &&  e.target.files[0].size <= 10000000){
+  setShow_error(false)
   axios.post('http://localhost:5000/upload_img',formData , headers)
   .then(response => {
     console.log(response.data);
@@ -63,9 +64,9 @@ else{
       <div className="header_title"> העלאת תמונה כדי להסיר את הרקע</div>
       <img className="close_img" src={close} alt="close"/>
 
-      <div className="upload_btn">העלאת תמונה </div>
-      {show_error ? <>פורמט לא מתמך</>: <></>}
-      <input type='file' onChange={upload_file} ref={inputElement}/>
+      <div className="upload_btn" onClick={focusInput}>העלאת תמונה </div>
+      {show_error ? <div className='file_type_error'>פורמט לא נתמך</div>: <></>}
+      <input type='file' onChange={upload_file} ref={inputElement} className='upload_input'/>
       <div className="content_div">
         <div className="content_left">
             <div className="tabs_cont">

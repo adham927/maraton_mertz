@@ -37,6 +37,7 @@
     background-image: url('./assets/Upload.png');
     background-repeat: no-repeat;
     background-position: 12px 17px;
+    cursor: pointer;
 }
 
 .content_div{
@@ -176,6 +177,14 @@
 .banner_img{
     width:75%;
     margin-right: 15px;
+}
+.upload_input{
+    display: none;
+}
+.file_type_error{
+    color: red;
+    position: absolute;
+    left: 77px;
 }
 
 .logo_img{
