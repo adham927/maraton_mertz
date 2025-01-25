@@ -22,11 +22,22 @@
     background-color: transparent;
     color: #ffffff8a;
     text-align: right;
-    padding-right: 8px;
+    padding-right: 27px;
     height: 26px;
     position: absolute;
     top: 7px;
-    left: 6px
+    left: 5px;
+}
+.color_selected{
+    border: 1px solid white;
+    width: 2%;
+    height: 24px;
+    margin-left: 82px;
+    margin-top: -21px;
+    border-top-right-radius: 95;
+    border-bottom-right-radius: 9px;
+    border-top-right-radius: 9px;
+    border-right: 0;
 }
 
 .disp_img_cont{
