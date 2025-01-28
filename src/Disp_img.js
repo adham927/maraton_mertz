@@ -14,7 +14,7 @@ function Disp_img(props) {
             {props.comp_type==='no_bg_comp'? 
             <>
                 <div className='top_text'>אל תשכח להוריד את הקבצים שלך, הם ימחקו אוטומטיתכשתצא מהדף</div>
-                <input className='color-input' type='color' ref={inputElement} />
+                <input className='color-input' onChange={props.color_selected} type='color' ref={inputElement} />
                 <button className='color-btn' onClick={focusInput}>צבע רקע</button>
                 <div className='color_selected'>
                     

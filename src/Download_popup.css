@@ -16,11 +16,66 @@
     top: 0;
 }
 .download_pic{
-    margin-left: 182px;
-    margin-top: -15px;
+    margin-top: -14px;
+    margin-left: 228px;
+    box-shadow: -4px 4px 4px #7b8487;
 }
 
 .img_eula{
-    margin-left: 13px;  
+    margin-left: 13px;
+    position: absolute;
+    top: 25px;
+  
+}
+.popup_title{
+    margin-left: 147px;
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 21px;
+    color: #2c2e65;
+}
+.popup_subtitle{
+    direction: rtl;
+    margin-right: 175px;
+    margin-top: 13px;
+    font-size: 13px;
+}
+.not-robot{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 32px;
+    margin-right: 72px;
+}
+
+.not-robot-text{
+    font-size: 11px;
+    margin-top: 2px;
+}
+.not-robot-img{
+    margin-right: 52px;
+    margin-top: 5px;
+    height: 15px;
+}
+.approve-cancle{
+    margin-left: 120px;
+    margin-top: 57px;
+}
+.approve-btn{
+    border-radius: 24px;
+    width: 164px;
+    height: 33px;
+    background: linear-gradient(90deg, #bc4ccc, #1505e2);
+    border-color: #00000075;
+    font-size: 14px;
+    color: white;
+    margin-right: 5px;
+}
+.cancle-btn{
+    border-radius: 24px;
+    width: 101px;
+    height: 33px;
+    background: white;
+    border-color: #00000075;
+    font-size: 14px;
 }
      

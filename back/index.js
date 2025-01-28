@@ -23,6 +23,15 @@ app.post('/upload_img', function(req, res){
        
     })
     res.json({ filename: req.files.fileImg.name });
+
+    // const filePath = `${__dirname}/uploaded_img/${req.files.fileImg.name}`;
+
+    // res.download(filePath, req.files.fileImg.name, (err) => {
+    //     if (err) {
+    //       console.error('Error while downloading file:', err);
+    //       res.status(500).send('Error downloading file.');
+    //     }
+    //   });
     
     // send_to_api(`${__dirname}/uploaded_img/${req.files.fileImg.name}`,req.files.fileImg.name)
     

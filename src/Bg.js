@@ -16,12 +16,18 @@ function Bg() {
   const [show_error, setShow_error] = useState(false);
   const [no_bg_img, setno_bg_img] = useState();
   const [bg_img, setbg_img] = useState();
+  const [selectedColor, setSelectedColor] = useState('');
+  // const [checkboxClicked, setcheckboxClicked] = useState(false);
 
 const inputElement = useRef();
 
 const focusInput = () => {
   inputElement.current.click();
 }
+
+// function checkbox_clicked(){
+//   setcheckboxClicked(!checkboxClicked)
+// }
 
   function selected(){
     setselected_tab(!selected_tab);
@@ -33,33 +39,47 @@ const focusInput = () => {
   function show_download_popup_func(){
     setShow_download_popup(!show_download_popup);
   }
-//  function upload_file(e){
-// let formData = new FormData();  
 
-// formData.append('fileImg', e.target.files[0]);   
- 
-//   let headers= {
-//     'Content-Type': 'multipart/form-data'
-//   }
 
-// if(( e.target.files[0].type === 'image/png' ||  e.target.files[0].type === 'image/jpeg') &&  e.target.files[0].size <= 10000000){
-//   debugger;
-//   setShow_error(false)
-//    axios.post("http://127.0.0.1:5000/upload_img",formData,headers)
-//   .then(response => {
-//     console.log('Server response:', response.data);
-//     const filePath = response.data;
-//     console.log('File path:', filePath);
-//     // setno_bg_img('http://localhost:5000/'+response.data);
-//        setbg_img('http://localhost:5000/'+response.data);
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
-// }
-// else{
-//   setShow_error(true)
-// }
+  // const handleDownload = async () => {
+  //   if(checkboxClicked){
+  //     const filename = 'img.png'; // Replace with the file name you want to download
+
+  //   try {
+  //     // Make a request to the server to download the file
+  //     const response = await axios.get(`http://localhost:5000/download/${filename}`, {
+  //       responseType: 'blob', // Important for handling binary data
+  //     });
+
+  //     // Create a URL for the file
+  //     const url = window.URL.createObjectURL(new Blob([response.data.filename]));
+  //     const link = document.createElement('a');
+  //     link.href = url;
+
+  //     // Set the file name for the downloaded file
+  //     link.setAttribute('download', filename);
+
+  //     // Trigger the download
+  //     document.body.appendChild(link);
+  //     link.click();
+
+  //     // Clean up the DOM
+  //     document.body.removeChild(link);
+  //   } catch (error) {
+  //     console.error('Error downloading file:', error);
+  //   }
+
+  //   }
+    
+  // };
+
+const color_selected = async (e) => {
+  setSelectedColor(e.target.value)
+  document.documentElement.style.setProperty('--selected-bg-color', e.target.value);
+}
+
+
+
 const upload_file = async (e) => {
   const formData = new FormData();
   formData.append('fileImg', e.target.files[0]); // Upload file
@@ -101,7 +121,7 @@ const upload_file = async (e) => {
                 <div className={"tabs_text text_bg_orig " + (selected_tab!==true ? 'border_bottom_selected' : '')} onClick={selected}>מקורי</div>
             </div>
             <div className="content_left_middle">
-               {selected_tab==true ? <Disp_img comp_type="no_bg_comp" img_src={no_bg_img}></Disp_img> : <Disp_img comp_type="orig_comp" img_src_no_bg={bg_img}></Disp_img>}
+               {selected_tab==true ? <Disp_img color_selected={color_selected} comp_type="no_bg_comp" img_src={no_bg_img}></Disp_img> : <Disp_img comp_type="orig_comp" img_src_no_bg={bg_img}></Disp_img>}
             </div>
 
             <div className="footer_left_content">
@@ -132,12 +152,13 @@ const upload_file = async (e) => {
         <div className='popup_eula'>
           <img className='img_eula' src={close} onClick={show_popup_eula} />
           <div className='popup_text'>
+            
           </div>
           
         </div>
       </> : <></>}
       {show_download_popup == true?
-      <Download_popup show_download_popup_func={show_download_popup_func}></Download_popup>: <></>
+      <Download_popup show_download_popup_func={show_download_popup_func}  ></Download_popup>: <></>
       }
     </div>
     

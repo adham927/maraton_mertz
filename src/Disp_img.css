@@ -30,15 +30,20 @@
 }
 .color_selected{
     border: 1px solid white;
-    width: 2%;
+    width: 3%;
     height: 24px;
-    margin-left: 82px;
+    margin-left: 78px;
     margin-top: -21px;
     border-top-right-radius: 95;
-    border-bottom-right-radius: 9px;
-    border-top-right-radius: 9px;
+    border-bottom-right-radius: 11px;
+    border-top-right-radius: 11px;
     border-right: 0;
+    background-color: var(--selected-bg-color);
 }
+:root {
+    --selected-bg-color: ; /* Default background color */
+  }
+  
 
 .disp_img_cont{
     position: relative;
