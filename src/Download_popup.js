@@ -7,7 +7,13 @@ function Download_popup(props) {
 
   
     function show_popup(){
+      debugger;
         props.show_download_popup_func()
+   }
+
+   function handleDownload(){
+    debugger;
+    props.handleFileDownload()
    }
  
    
@@ -36,7 +42,7 @@ function Download_popup(props) {
                 <img className='not-robot-img' src={not_robot}/>
               </div>
               <div className='approve-cancle'>
-                <button className='approve-btn'>אישור</button>
+                <button className='approve-btn' onClick={handleDownload}>אישור</button>
                 <button className='cancle-btn' onClick={show_popup}>ביטול</button>
               </div>
               

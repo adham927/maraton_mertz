@@ -17,7 +17,7 @@ function Bg() {
   const [no_bg_img, setno_bg_img] = useState();
   const [bg_img, setbg_img] = useState();
   const [selectedColor, setSelectedColor] = useState('');
-  // const [checkboxClicked, setcheckboxClicked] = useState(false);
+  const [checkboxClicked, setcheckboxClicked] = useState(false);
 
 const inputElement = useRef();
 
@@ -25,9 +25,9 @@ const focusInput = () => {
   inputElement.current.click();
 }
 
-// function checkbox_clicked(){
-//   setcheckboxClicked(!checkboxClicked)
-// }
+function checkbox_clicked(){
+  setcheckboxClicked(!checkboxClicked)
+}
 
   function selected(){
     setselected_tab(!selected_tab);
@@ -41,38 +41,44 @@ const focusInput = () => {
   }
 
 
-  // const handleDownload = async () => {
-  //   if(checkboxClicked){
-  //     const filename = 'img.png'; // Replace with the file name you want to download
-
-  //   try {
-  //     // Make a request to the server to download the file
-  //     const response = await axios.get(`http://localhost:5000/download/${filename}`, {
-  //       responseType: 'blob', // Important for handling binary data
-  //     });
-
-  //     // Create a URL for the file
-  //     const url = window.URL.createObjectURL(new Blob([response.data.filename]));
-  //     const link = document.createElement('a');
-  //     link.href = url;
-
-  //     // Set the file name for the downloaded file
-  //     link.setAttribute('download', filename);
-
-  //     // Trigger the download
-  //     document.body.appendChild(link);
-  //     link.click();
-
-  //     // Clean up the DOM
-  //     document.body.removeChild(link);
-  //   } catch (error) {
-  //     console.error('Error downloading file:', error);
-  //   }
-
-  //   }
+  const handleFileDownload = async () => {
     
-  // };
+     if(checkboxClicked){
+      if (!bg_img) {
+        console.error('No file name available for download');
+        return;
+      }
+    
+      console.log('Downloading file:', bg_img);
+  
+      try {
+        const response = await axios.get(`${bg_img}`, {
+          responseType: 'blob', // Get the file as a blob
+        });
+  
+        // Create a URL for the file and trigger download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+  
+        var str = bg_img;
+        var n = str.lastIndexOf('/');
+        var result = str.substring(n + 1);
+  
+        // Use the same unique file name from the server
+        link.setAttribute('download', result);
+  
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error('Error downloading file:', error);
+      }
+    }
+}
 
+
+    
 const color_selected = async (e) => {
   setSelectedColor(e.target.value)
   document.documentElement.style.setProperty('--selected-bg-color', e.target.value);
@@ -158,7 +164,7 @@ const upload_file = async (e) => {
         </div>
       </> : <></>}
       {show_download_popup == true?
-      <Download_popup show_download_popup_func={show_download_popup_func}  ></Download_popup>: <></>
+      <Download_popup show_download_popup_func={show_download_popup_func} handleFileDownload={handleFileDownload} checkbox_clicked={checkbox_clicked} ></Download_popup>: <></>
       }
     </div>
     
