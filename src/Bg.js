@@ -18,6 +18,9 @@ function Bg() {
   const [bg_img, setbg_img] = useState();
   const [selectedColor, setSelectedColor] = useState('');
   const [checkboxClicked, setcheckboxClicked] = useState(false);
+  const [no_img, setno_img] = useState(false);
+  
+
 
 const inputElement = useRef();
 
@@ -37,7 +40,14 @@ function checkbox_clicked(){
     setShow_eula(!show_eula);
   }
   function show_download_popup_func(){
-    setShow_download_popup(!show_download_popup);
+    if (bg_img) {
+      setShow_download_popup(!show_download_popup);
+      setcheckboxClicked(false)
+    }
+    else{
+      setno_img(!no_img)
+    }
+    
   }
 
 
@@ -74,6 +84,8 @@ function checkbox_clicked(){
       } catch (error) {
         console.error('Error downloading file:', error);
       }
+      setShow_download_popup(!show_download_popup);
+      setcheckboxClicked(!checkboxClicked)
     }
 }
 
@@ -98,6 +110,7 @@ const upload_file = async (e) => {
           
           console.log('Response from server:', response.data); // Log server response
           setbg_img('http://localhost:5000/'+response.data.filename);
+          setno_img(!no_img)
         } catch (error) {
           console.error('Error uploading file:', error);
         }
@@ -105,11 +118,6 @@ const upload_file = async (e) => {
        else{
            setShow_error(true)
          }
-
-  
-
-   
- 
   }
   return (
     <div>
@@ -140,7 +148,7 @@ const upload_file = async (e) => {
         </div>
         <div className="content_right">
             <div className="content_right_middle">
-                <Download show_download_popup_func={show_download_popup_func} title="תמונה חינם" desc="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 פיקסל" comp_side="top"></Download>
+                <Download show_download_popup_func={show_download_popup_func} title="תמונה חינם" desc="תצוגה מקדימה של תמונה" btn_text="הורד" small_text="איכות טובה עד 0.25 פיקסל" comp_side="top" no_img={no_img}></Download>
                 <Download show_download_popup_func={show_download_popup_func} title="Pro" desc="תצוגה מלאה" btn_text="HD הורד" small_text="איכות הטובה ביותר עד 25 מגה פיקסל" comp_side="bottom"></Download>
             </div>
         </div>
@@ -164,7 +172,7 @@ const upload_file = async (e) => {
         </div>
       </> : <></>}
       {show_download_popup == true?
-      <Download_popup show_download_popup_func={show_download_popup_func} handleFileDownload={handleFileDownload} checkbox_clicked={checkbox_clicked} ></Download_popup>: <></>
+      <Download_popup show_download_popup_func={show_download_popup_func} handleFileDownload={handleFileDownload} checkbox_clicked={checkbox_clicked} checkboxClicked={checkboxClicked} ></Download_popup>: <></>
       }
     </div>
     

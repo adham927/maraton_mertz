@@ -16,8 +16,6 @@ function Download_popup(props) {
     props.handleFileDownload()
    }
  
-   
-
     return (
     <>
     <div className='overlay'></div>
@@ -41,6 +39,9 @@ function Download_popup(props) {
                 </div>
                 <img className='not-robot-img' src={not_robot}/>
               </div>
+
+              {!props.checkboxClicked?  <div className='not-robot-note'>יש לאשר שאתה לא רובוט</div> : <></>}
+             
               <div className='approve-cancle'>
                 <button className='approve-btn' onClick={handleDownload}>אישור</button>
                 <button className='cancle-btn' onClick={show_popup}>ביטול</button>

@@ -20,6 +20,7 @@ function Download(props) {
         <div className="download_btn" onClick={show_popup}>
              {props.btn_text}  
         </div>
+        {props.no_img? <div className='no-img-to-download'>יש לעלות תמונה כדי להוריד</div>: <></> }
         <div className="small_texxt_download">
              {props.small_text} 
              <img src={check} className="check_icon"/> 
